@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 
 import Phaser from 'phaser';
-import { BootScene } from '~/game/scenes';
+import { BootScene, GameScene } from '~/game/scenes';
 
 export const GameContainer = () => {
   const gameContainerRef = useRef<HTMLDivElement>(null);
@@ -15,7 +15,18 @@ export const GameContainer = () => {
         width: mapWidth * 16,
         height: mapHeight * 16,
         type: Phaser.AUTO,
-        scene: [new BootScene()],
+        scene: [
+          new BootScene(),
+          new GameScene({
+            config: {
+              mapSize: { x: mapWidth, y: mapHeight },
+              playerPosition: {
+                x: 50,
+                y: 400,
+              },
+            },
+          }),
+        ],
         scale: {
           width: '100%',
           height: '100%',
@@ -25,6 +36,7 @@ export const GameContainer = () => {
         physics: {
           default: 'arcade',
           arcade: {
+            debug: import.meta.env.DEV,
             gravity: { y: 0, x: 1 },
           },
         },

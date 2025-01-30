@@ -1,4 +1,5 @@
-import type { GameSceneAbstract } from '~/game/classes';
+import type { GameSceneAbstract } from '~/game/classes/abstract';
+export type InteractionType = 'farm' | 'trader-shop';
 
 export interface GameSceneProps {
   config: {

@@ -1,1 +1,1 @@
-export * from './game-scene-abstract';
+export * from './pathfinder';
