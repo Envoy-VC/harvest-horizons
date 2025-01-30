@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react';
 
 import Phaser from 'phaser';
 import { BootScene, GameScene } from '~/game/scenes';
+import MainMenuScene from '~/game/scenes/main-menu';
 
 export const GameContainer = () => {
   const gameContainerRef = useRef<HTMLDivElement>(null);
@@ -17,6 +18,7 @@ export const GameContainer = () => {
         type: Phaser.AUTO,
         scene: [
           new BootScene(),
+          new MainMenuScene(),
           new GameScene({
             config: {
               mapSize: { x: mapWidth, y: mapHeight },

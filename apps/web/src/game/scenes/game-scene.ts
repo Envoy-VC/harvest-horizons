@@ -69,7 +69,7 @@ export class GameScene extends Phaser.Scene implements GameSceneAbstract {
           .setAlpha(0);
       } else if (layer.name.includes('Trees')) {
         // biome-ignore lint/style/noNonNullAssertion: safe
-        map.createLayer(layer.name, tilesets, 0, 0)!.setScale(zoom).setDepth(2);
+        map.createLayer(layer.name, tilesets, 0, 0)!.setScale(zoom);
       } else {
         // biome-ignore lint/style/noNonNullAssertion: safe
         map.createLayer(layer.name, tilesets, 0, 0)!.setScale(zoom).setDepth(0);

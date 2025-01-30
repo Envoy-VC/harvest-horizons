@@ -14,7 +14,9 @@ export class BootScene extends Phaser.Scene {
     for (const tileset of GameMap.tilesets) {
       this.load.image(tileset.name, `assets/${tileset.image}`);
     }
-
+    this.load.image('background', 'assets/background.jpg');
+    this.load.image('logo', 'assets/logo.png');
+    this.load.image('button', 'assets/ui/button.png');
     this.load.tilemapTiledJSON('world', 'assets/map.json');
 
     for (const character of spriteSheets) {
@@ -29,6 +31,6 @@ export class BootScene extends Phaser.Scene {
     for (const character of spriteSheets) {
       createAnimations(this, character);
     }
-    this.scene.start('GameScene');
+    this.scene.start('MainMenu');
   }
 }
