@@ -15,6 +15,9 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@radix-ui/react-dialog": "^1.1.5",
+    "@radix-ui/react-slot": "^1.1.1",
+    "@radix-ui/react-toast": "^1.2.5",
     "@tanstack/react-query": "^5.61.4",
     "@tanstack/react-router": "^1.82.8",
     "@tanstack/router-devtools": "^1.82.8",
@@ -22,10 +25,12 @@
     "clsx": "^2.1.1",
     "lucide-react": "^0.474.0",
     "mobx": "^6.13.5",
+    "next-themes": "^0.4.4",
     "pathfinding": "^0.4.18",
     "phaser": "^3.87.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "sonner": "^1.7.4",
     "tailwind-merge": "^2.5.5",
     "tailwindcss-animate": "^1.0.7",
     "usehooks-ts": "^3.1.0",

@@ -6,6 +6,7 @@ body {
   margin: 0px;
   padding: 0px;
   cursor: url("assets/ui/cursor.png"), auto;
+  font-family: "Minecraftia", sans-serif;
 }
 
 button,
@@ -90,6 +91,7 @@ input,
 }
 
 @theme {
+  --font-minecraftia: "Minecraftia", sans-serif;
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
@@ -146,4 +148,31 @@ input,
       height: "0";
     }
   }
+}
+
+.sheet-background {
+  background-image: url("assets/ui/sheet.png");
+  background-size: 114% 108%;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 100%;
+  height: 100%;
+}
+
+.button-background {
+  background-image: url("assets/ui/button.png");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 100%;
+  height: 100%;
+}
+
+.dialog-background {
+  background-image: url("assets/ui/dialog.png");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  /* width: 100%; */
+  /* height: 100%; */
 }
