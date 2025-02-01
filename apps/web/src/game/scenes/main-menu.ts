@@ -32,13 +32,13 @@ export default class MainMenuScene extends Phaser.Scene {
     const button = this.add
       .image(x, y, 'button')
       .setOrigin(0.5, 0.5)
-      .setScale(3, 2)
+      .setScale(0.5, 0.5)
       .setInteractive({ useHandCursor: true });
 
     this.add
       .text(x, y, text, {
-        fontFamily: 'Arial',
-        fontSize: 32,
+        fontFamily: 'Minecraftia',
+        fontSize: 24,
         color: '#3A3A50',
         align: 'center',
       })

@@ -35,9 +35,6 @@ export class InteractionText {
   checkInteractionTile(scene: CreatePlayerProps['scene']) {
     const playerX = scene.player.sprite.x;
     const playerY = scene.player.sprite.y;
-    if (!scene.interactionLayer) {
-      return null;
-    }
 
     const tile = scene.interactionLayer.getTileAtWorldXY(
       playerX,
@@ -63,11 +60,8 @@ export class InteractionText {
     this.interactionType = interactionType;
     this.interactionText
       .setText('Press E to interact')
-      .setPosition(
-        scene.cameras.main.width / 2 - this.interactionText.width / 2,
-        750
-      )
-      .setOrigin(0, 0)
+      .setPosition(scene.cameras.main.width / 2, 750)
+      .setOrigin(0.5, 0.5)
       .setAlpha(1)
       .setDepth(50)
       .setScrollFactor(0)
@@ -93,11 +87,11 @@ export class InteractionText {
 
   update({ scene }: UpdateProps) {
     const tile = this.checkInteractionTile(scene);
-    // if (tile) {
-    //   this.handleInteraction(scene, tile);
-    // } else {
-    //   this.interactionType = null;
-    //   this.interactionText.setAlpha(0);
-    // }
+    if (tile) {
+      this.handleInteraction(scene, tile);
+    } else {
+      this.interactionType = null;
+      this.interactionText.setAlpha(0);
+    }
   }
 }
