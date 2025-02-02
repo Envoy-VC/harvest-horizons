@@ -15,4 +15,5 @@ export abstract class GameSceneAbstract extends Phaser.Scene {
   abstract pathfinder: Pathfinder;
   abstract interactionText: InteractionText;
   abstract isModalOpen: boolean;
+  abstract tileSize: number;
 }

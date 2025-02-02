@@ -4,7 +4,7 @@ import GameMap from 'public/assets/map.json';
 
 import { Pathfinder } from '../classes';
 import type { GameSceneAbstract, NPCAbstract } from '../classes/abstract';
-import { InteractionText, Player } from '../entities';
+import { InteractionText, NPC, Player } from '../entities';
 import { type CursorKeys, createCursorKeys } from '../helpers/movement';
 
 import type { GameSceneProps } from '~/types/game';
@@ -20,13 +20,14 @@ export class GameScene extends Phaser.Scene implements GameSceneAbstract {
   pathfinder!: Pathfinder;
   interactionText!: InteractionText;
   isModalOpen: boolean;
-
+  tileSize: number;
   config: GameSceneProps['config'];
 
   constructor(props: GameSceneProps) {
     super({ key: 'GameScene' });
     this.config = props.config;
     this.isModalOpen = false;
+    this.tileSize = 16;
   }
 
   create() {
@@ -92,6 +93,9 @@ export class GameScene extends Phaser.Scene implements GameSceneAbstract {
     });
 
     this.npcs = [];
+    this.npcs.push(
+      new NPC({ x: 100, y: 100, sprite: 'farmer', speed: 50, scene: this })
+    );
     for (const npc of this.npcs) {
       this.physics.add.collider(this.player.sprite, npc.sprite);
     }
