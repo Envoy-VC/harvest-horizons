@@ -39,6 +39,7 @@ export class NPC extends NPCAbstract {
     const { x, y } = this.getTilePosition(scene);
     const path = scene.pathfinder.findPath(x, y, tileX, tileY);
     if (path.length === 0) {
+      this.isMoving = false;
       return;
     }
     this.targetPath = path as [number, number][];
