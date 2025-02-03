@@ -1,6 +1,10 @@
 import type { EVMWalletClient } from '@goat-sdk/wallet-evm';
 import { ABI } from './abi';
-import { HARVEST_HORIZONS_CONTRACT_ADDRESS } from './constants';
+import {
+  HARVEST_HORIZONS_CONTRACT_ADDRESS,
+  type ItemType,
+  itemsMap,
+} from './constants';
 import type {
   BulkEditInventoryParameters,
   GetInventoryParameters,
@@ -25,16 +29,6 @@ export const getInventory = async (
   }
 };
 
-const itemsMap: Record<string, number> = {
-  Carrot: 0,
-  Potato: 1,
-  Tomato: 2,
-  'Carrot Seeds': 3,
-  'Potato Seeds': 4,
-  'Tomato Seeds': 5,
-  Coin: 6,
-};
-
 export const bulkEditInventory = async (
   walletClient: EVMWalletClient,
   parameters: BulkEditInventoryParameters
@@ -46,7 +40,7 @@ export const bulkEditInventory = async (
     return 1;
   });
   const items = parameters.itemIds.map((itemId) => {
-    return itemsMap[itemId] ?? 7;
+    return itemsMap[itemId as ItemType] ?? 7;
   });
   try {
     const res = await walletClient.sendTransaction({

@@ -1,10 +1,36 @@
+import { useMemo } from 'react';
+import { useReadContract } from 'wagmi';
+import { useAccount } from 'wagmi';
+import { harvestHorizonsConfig } from '~/data/contract';
+
+import { itemsMapReverse } from 'harvest-horizon-goat-plugin';
+
 export const Inventory = () => {
-  //   const { inventory } = usePlayer();
+  const { address } = useAccount();
+  const { data } = useReadContract({
+    ...harvestHorizonsConfig,
+    functionName: 'getPlayerInventory',
+    args: [address ?? '0x0000000000000000000000000000000000000000'],
+  });
+
+  const inventory = useMemo(() => {
+    return (data ?? []).map((item, index) => {
+      return {
+        // biome-ignore lint/style/noNonNullAssertion: <explanation>
+        itemId: itemsMapReverse[Number(item.id)]!,
+        quantity: Number(item.amount),
+        id: index,
+      };
+    });
+  }, [data]);
+
   return (
-    <div className='flex flex-col gap-6 pt-4'>
-      <div className='px-6 font-black font-minecraftia text-3xl'>Inventory</div>
+    <div className='flex flex-col gap-6 p-8'>
+      <div className='px-6 text-center font-black font-minecraftia text-3xl'>
+        Inventory
+      </div>
       <div className='flex flex-row flex-wrap items-center gap-4'>
-        {/* {inventory.map((item) => {
+        {inventory.map((item) => {
           const name = item.itemId
             .split('_')
             .map((word) => {
@@ -24,10 +50,11 @@ export const Inventory = () => {
               key={item.id}
               className='flex aspect-square w-full max-w-[160px] flex-col items-center gap-2 rounded-md border-3 border-[#6B5052] p-2'
             >
+              {/* biome-ignore lint/nursery/noImgElement: <explanation> */}
               <img
                 alt={item.itemId}
                 className='h-16 w-16 object-cover'
-                src={`/ui/${item.itemId}.png`}
+                src={`/assets/ui/${item.itemId}.png`}
               />
               <div className='font-black font-minecraftia text-base'>
                 x{item.quantity}
@@ -37,7 +64,7 @@ export const Inventory = () => {
               </div>
             </div>
           );
-        })} */}
+        })}
       </div>
     </div>
   );

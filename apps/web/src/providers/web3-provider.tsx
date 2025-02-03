@@ -18,7 +18,7 @@ const metadata = {
 
 const networks = [avalancheFuji];
 
-const wagmiAdapter = new WagmiAdapter({
+export const wagmiAdapter = new WagmiAdapter({
   networks,
   projectId,
   ssr: false,

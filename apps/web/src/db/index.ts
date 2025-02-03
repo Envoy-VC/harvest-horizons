@@ -1,11 +1,5 @@
 import Dexie, { type EntityTable } from 'dexie';
-
-// biome-ignore lint/nursery/noEnum: <explanation>
-export enum CropType {
-  Carrot = 0,
-  Potato = 1,
-  Tomato = 2,
-}
+import type { CropType } from '~/types/game';
 
 interface CropsPlanted {
   id: number;
@@ -16,10 +10,20 @@ interface CropsPlanted {
   harvestAt: string;
 }
 
-export const db = new Dexie('FriendsDatabase') as Dexie & {
+interface DailyClaims {
+  id: number;
+  playerAddress: string;
+  weekNumber: number;
+  dayNumber: number;
+  claimedAt: number;
+}
+
+export const db = new Dexie('HarvestHorizonDB') as Dexie & {
   crops: EntityTable<CropsPlanted, 'id'>;
+  dailyClaims: EntityTable<DailyClaims, 'id'>;
 };
 
 db.version(1).stores({
   crops: '++id, address',
+  dailyClaims: '++id, playerAddress, dayNumber',
 });

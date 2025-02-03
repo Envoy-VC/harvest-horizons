@@ -1,5 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router';
-import {} from '~/components';
+import { DailyRewards } from '~/components';
 
 import { ConnectButton, GameContainer, MenuButton } from '~/components';
 
@@ -8,6 +8,7 @@ export const HomeComponent = () => {
     <div>
       <MenuButton />
       <ConnectButton />
+      <DailyRewards />
       <GameContainer />
     </div>
   );

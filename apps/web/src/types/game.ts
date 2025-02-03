@@ -1,6 +1,10 @@
 import type { GameSceneAbstract } from '~/game/classes/abstract';
-import type { CropType, GrowthStage } from '~/game/helpers/data';
+import type { GrowthStage } from '~/game/helpers/data';
 export type InteractionType = 'farm' | 'trader-shop';
+
+export type CropType = 'carrot' | 'potato' | 'tomato';
+export type SeedType = 'carrot-seeds' | 'potato-seeds' | 'tomato-seeds';
+export type ItemType = CropType | SeedType | 'coin';
 
 export interface GameSceneProps {
   config: {

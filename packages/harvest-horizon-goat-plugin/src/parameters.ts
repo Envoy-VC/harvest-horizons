@@ -13,7 +13,7 @@ export const bulkEditInventorySchema = z.object({
   itemIds: z
     .array(z.string())
     .describe(
-      `The Item to Edit, one of ['Carrot', 'Potato', 'Tomato', 'Carrot Seeds', 'Potato Seeds', 'Tomato Seeds', 'Coin']`
+      `The Item to Edit, one of ['carrot', 'potato', 'tomato', 'carrot-seeds', 'potato-seeds', 'tomato-seeds', 'coin']`
     ),
   amounts: z.array(z.number()).describe('The amounts of the items to edit'),
   operations: z
