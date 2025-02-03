@@ -4,7 +4,7 @@ import GameMap from 'public/assets/map.json';
 
 import { Pathfinder } from '../classes';
 import type { GameSceneAbstract, NPCAbstract } from '../classes/abstract';
-import { InteractionText, NPC, Player } from '../entities';
+import { Farm, InteractionText, NPC, Player } from '../entities';
 import { type CursorKeys, createCursorKeys } from '../helpers/movement';
 
 import type { GameSceneProps } from '~/types/game';
@@ -18,6 +18,7 @@ export class GameScene extends Phaser.Scene implements GameSceneAbstract {
   npcs!: NPCAbstract[];
   cursors!: CursorKeys;
   pathfinder!: Pathfinder;
+  farm!: Farm;
   interactionText!: InteractionText;
   isModalOpen: boolean;
   tileSize: number;
@@ -99,6 +100,9 @@ export class GameScene extends Phaser.Scene implements GameSceneAbstract {
     for (const npc of this.npcs) {
       this.physics.add.collider(this.player.sprite, npc.sprite);
     }
+
+    // Farm
+    this.farm = new Farm({ scene: this });
 
     // Set Collision with World Bounds and Collision Layer
     this.physics.world.setBounds(0, 0, mapWidth * zoom, mapHeight * zoom);

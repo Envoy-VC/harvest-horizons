@@ -23,7 +23,7 @@ export const GameContainer = () => {
             config: {
               mapSize: { x: mapWidth, y: mapHeight },
               playerPosition: {
-                x: 50,
+                x: 650,
                 y: 400,
               },
             },

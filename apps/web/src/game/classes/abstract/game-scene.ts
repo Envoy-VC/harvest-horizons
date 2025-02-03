@@ -1,5 +1,5 @@
 import Phaser from 'phaser';
-import type { InteractionText } from '~/game/entities';
+import type { Farm, InteractionText } from '~/game/entities';
 import type { CursorKeys } from '~/game/helpers/movement';
 import type { Pathfinder } from '../pathfinder';
 import type { NPCAbstract } from './npc';
@@ -16,4 +16,5 @@ export abstract class GameSceneAbstract extends Phaser.Scene {
   abstract interactionText: InteractionText;
   abstract isModalOpen: boolean;
   abstract tileSize: number;
+  abstract farm: Farm;
 }

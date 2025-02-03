@@ -1,4 +1,5 @@
 import type { GameSceneAbstract } from '~/game/classes/abstract';
+import type { CropType, GrowthStage } from '~/game/helpers/data';
 export type InteractionType = 'farm' | 'trader-shop';
 
 export interface GameSceneProps {
@@ -40,4 +41,10 @@ export interface TeleportProps {
   tileX: number;
   tileY: number;
   scene: GameSceneAbstract;
+}
+
+export interface PlantCropProps {
+  type: CropType;
+  stage: GrowthStage;
+  tiles: { x: number; y: number }[];
 }
