@@ -8,10 +8,7 @@ gas_reports = ["*"]
 fs_permissions = [{ access = "read-write", path = "../" }]
 
 
-# See more config options https://github.com/foundry-rs/foundry/blob/master/crates/config/README.md#all-options
-
 [rpc_endpoints]
-sepolia = "https://endpoints.omniatech.io/v1/eth/sepolia/public"
+avalanche-fuji = "https://avalanche-fuji-c-chain-rpc.publicnode.com"
 
-[etherscan]
-sepolia = { key = "${SEPOLIA_ETHERSCAN_API_KEY}", chain = 11155111 }
+# forge script --chain avalanche-fuji script/Deploy.s.sol:DeployScript --rpc-url $FUJI_TESTNET_RPC --broadcast --verify -vvvv --interactives 1 --verifier-url 'https://api.routescan.io/v2/network/testnet/evm/43113/etherscan' --etherscan-api-key "verifyContract"
