@@ -1,0 +1,42 @@
+{
+  "name": "harvest-horizon-goat-plugin",
+  "version": "0.0.1",
+  "description": "",
+  "keywords": [],
+  "license": "ISC",
+  "author": "",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    }
+  },
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "files": ["dist/**"],
+  "scripts": {
+    "build": "tsup",
+    "dev": "vitest",
+    "format": "pnpm format:write",
+    "format:check": "pnpm ultracite lint",
+    "format:write": "pnpm ultracite format",
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "1.9.4",
+    "@envoy1084/style-guide": "^0.1.0",
+    "@types/node": "^22",
+    "tsup": "^8.3.5",
+    "typescript": "^5.7.3",
+    "ultracite": "4.1.17",
+    "vitest": "^3.0.4"
+  },
+  "dependencies": {
+    "@goat-sdk/core": "^0.4.6",
+    "@goat-sdk/wallet-evm": "^0.2.7",
+    "viem": "^2.22.19",
+    "zod": "^3.23.8"
+  }
+}
