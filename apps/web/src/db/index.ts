@@ -18,7 +18,7 @@ interface DailyClaims {
   claimedAt: number;
 }
 
-interface Task {
+export interface Task {
   id: number;
   playerAddress: string;
   taskType: NPCActionType;

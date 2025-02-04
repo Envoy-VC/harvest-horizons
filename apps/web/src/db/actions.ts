@@ -81,3 +81,23 @@ export const getChats = async (playerAddress: string) => {
 
   return res;
 };
+
+export const getTasks = async (playerAddress: string) => {
+  const res = await db.tasks
+    .where('playerAddress')
+    .equals(playerAddress)
+    .limit(8)
+    .sortBy('createdAt');
+
+  return res;
+};
+
+export const clearTasks = async (playerAddress: string) => {
+  const pendingTasks = await db.tasks
+    .where('playerAddress')
+    .equals(playerAddress)
+    .and((task) => task.status === 'pending' || task.status === 'failed')
+    .toArray();
+
+  await db.tasks.bulkDelete(pendingTasks.map((t) => t.id));
+};
