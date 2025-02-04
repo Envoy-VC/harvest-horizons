@@ -28,3 +28,12 @@ export const Position = {
   FarmerHouse: { x: 26, y: 7 },
   Farm: { x: 24, y: 13 },
 };
+
+export const itemCosts = [
+  { type: 'carrot', quantity: 3, coinsNeeded: 1 },
+  { type: 'tomato', quantity: 2, coinsNeeded: 1 },
+  { type: 'potato', quantity: 4, coinsNeeded: 1 },
+  { type: 'carrot-seeds', quantity: 8, coinsNeeded: 1 },
+  { type: 'tomato-seeds', quantity: 6, coinsNeeded: 1 },
+  { type: 'potato-seeds', quantity: 10, coinsNeeded: 1 },
+];

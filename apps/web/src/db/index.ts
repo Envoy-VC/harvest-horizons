@@ -7,7 +7,7 @@ interface CropsPlanted {
   cropType: CropType;
   plantedAt: number;
   tiles: { x: number; y: number }[];
-  harvestAt: string;
+  harvestAt: string | null;
 }
 
 interface DailyClaims {
@@ -34,7 +34,7 @@ export const db = new Dexie('HarvestHorizonDB') as Dexie & {
 };
 
 db.version(1).stores({
-  crops: '++id, address',
+  crops: '++id, address, playerAddress',
   dailyClaims: '++id, playerAddress, dayNumber, weekNumber',
   tasks: '++id, playerAddress',
 });

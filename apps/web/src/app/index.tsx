@@ -3,21 +3,28 @@ import { DailyRewards } from '~/components';
 
 import { ConnectButton, GameContainer, MenuButton } from '~/components';
 import { Button } from '~/components/ui/button';
-import { taskEmitter } from '~/game/emitter';
+
+import { useAccount } from 'wagmi';
+import { generateActions } from '~/lib/ai';
 
 export const HomeComponent = () => {
+  const { address } = useAccount();
   return (
     <div>
       <div className='absolute top-24 right-12'>
         <Button
-          onClick={() => {
-            taskEmitter.emit('add-task', {
-              action: 'move',
-              args: { x: 6, y: 9 },
-            });
+          onClick={async () => {
+            if (!address) {
+              return;
+            }
+
+            await generateActions(
+              'I need potatoes, can you get them for me.',
+              address
+            );
           }}
         >
-          Task
+          Generate
         </Button>
       </div>
       <MenuButton />
