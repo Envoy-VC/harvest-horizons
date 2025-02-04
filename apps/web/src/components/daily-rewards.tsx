@@ -54,7 +54,7 @@ export const DailyRewards = () => {
   return (
     <Dialog>
       <DialogTrigger className='absolute top-4 right-20'>
-        <IconButton icon='mail-button' className='h-10 w-10' />
+        <IconButton icon='trophy-button' className='h-10 w-10' />
       </DialogTrigger>
       <DialogContent className='w-full max-w-5xl'>
         <div className='flex flex-col gap-6 pt-4'>

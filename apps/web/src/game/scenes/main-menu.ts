@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import { world } from '../state';
 
 export default class MainMenuScene extends Phaser.Scene {
   constructor() {
@@ -24,9 +25,10 @@ export default class MainMenuScene extends Phaser.Scene {
 
     logo.setScale(1);
 
-    this.createButton(width / 2, height / 2, 'Play', () =>
-      this.scene.start('GameScene')
-    );
+    this.createButton(width / 2, height / 2, 'Play', () => {
+      world.changeScene('GameScene');
+      this.scene.start('GameScene');
+    });
   }
   createButton(x: number, y: number, text: string, callback: () => void) {
     const button = this.add
