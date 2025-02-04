@@ -1,18 +1,18 @@
 export const FarmTile = 858;
 export const CropTiles = {
-  Carrot: {
+  carrot: {
     Sprout: [880, 866],
     Seedling: [882, 868],
     Growth: [884, 870],
     Harvest: [886, 872],
   },
-  Tomato: {
+  tomato: {
     Sprout: [908, 894],
     Seedling: [910, 896],
     Growth: [912, 898],
     Harvest: [914, 900],
   },
-  Potato: {
+  potato: {
     Sprout: [936, 922],
     Seedling: [938, 924],
     Growth: [940, 926],

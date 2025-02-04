@@ -1,13 +1,13 @@
 import Dexie, { type EntityTable } from 'dexie';
 import type { CropType, NPCActionArgs, NPCActionType } from '~/types/game';
 
-interface CropsPlanted {
+export interface CropsPlanted {
   id: number;
-  address: string;
+  playerAddress: string;
   cropType: CropType;
   plantedAt: number;
-  tiles: { x: number; y: number }[];
-  harvestAt: string | null;
+  tiles: [number, number][];
+  harvestAt: number | null;
 }
 
 interface DailyClaims {
@@ -44,7 +44,7 @@ export const db = new Dexie('HarvestHorizonDB') as Dexie & {
 };
 
 db.version(1).stores({
-  crops: '++id, address, playerAddress',
+  crops: '++id, playerAddress',
   dailyClaims: '++id, playerAddress, dayNumber, weekNumber',
   tasks: '++id, playerAddress',
   chats: '++id, playerAddress, role',

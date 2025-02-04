@@ -13,6 +13,7 @@ import { Button } from '~/components/ui/button';
 import { observer } from 'mobx-react-lite';
 import { useAccount } from 'wagmi';
 
+import { InteractionDialog } from '~/components/interactions';
 import { world } from '~/game/state';
 import { generateActions } from '~/lib/ai';
 
@@ -22,6 +23,7 @@ export const HomeComponent = () => {
       <GameElements />
       <GameContainer />
       <ConnectButton />
+      <InteractionDialog />
     </div>
   );
 };

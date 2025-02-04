@@ -4,6 +4,7 @@ import { CropTiles, FarmTile } from '../helpers/data';
 
 import type Phaser from 'phaser';
 import { farmerEmitter } from '../emitter';
+import { world } from '../state';
 
 interface FarmProps {
   scene: GameSceneAbstract;
@@ -46,6 +47,15 @@ export class Farm {
         },
       ]);
     });
+
+    farmerEmitter.on('placeCrops', (props) => {
+      this.plantCrops(props);
+    });
+
+    farmerEmitter.on('getEmptyFarmTiles', ({ amount, used }) => {
+      const tiles = this.getEmptyFarmTiles(amount, used);
+      world.setAvailableFarmTiles(tiles);
+    });
   }
 
   getEmptyFarmTiles(amount: number, used: { x: number; y: number }[]) {
@@ -77,6 +87,7 @@ export class Farm {
   }
 
   plantCrops(props: PlantCropProps[]) {
+    this.resetCropLayers();
     for (const prop of props) {
       this.plantCrop(prop);
     }

@@ -7,6 +7,7 @@ class GameState {
   interactionType: InteractionType;
   keyboardInteractionsDisabled: boolean;
   currentScene: 'GameScene' | 'MenuScreen';
+  availableFarmTiles: { x: number; y: number }[];
 
   constructor() {
     makeAutoObservable(this);
@@ -14,6 +15,7 @@ class GameState {
     this.isInteractionModalOpen = false;
     this.keyboardInteractionsDisabled = false;
     this.currentScene = 'MenuScreen';
+    this.availableFarmTiles = [];
   }
 
   setInteractionModalOpen(isOpen: boolean, type: InteractionType) {
@@ -31,6 +33,10 @@ class GameState {
 
   enableKeyboardInteractions() {
     this.keyboardInteractionsDisabled = false;
+  }
+
+  setAvailableFarmTiles(tiles: { x: number; y: number }[]) {
+    this.availableFarmTiles = tiles;
   }
 }
 

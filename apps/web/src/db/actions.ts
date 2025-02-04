@@ -1,3 +1,6 @@
+import Phaser from 'phaser';
+import { cropDetails } from '~/data/crops';
+import type { CropType } from '~/types/game';
 import { db } from '.';
 
 function getWeekNumber(date: Date) {
@@ -100,4 +103,126 @@ export const clearTasks = async (playerAddress: string) => {
     .toArray();
 
   await db.tasks.bulkDelete(pendingTasks.map((t) => t.id));
+};
+
+const isBetween = (x: number, [a, b]: [number, number]) => {
+  return x >= a && x <= b;
+};
+
+export const getPendingCrops = async (playerAddress: string) => {
+  const data = await db.crops
+    .where('playerAddress')
+    .equals(playerAddress)
+    .and((crop) => {
+      return crop.harvestAt === null;
+    })
+    .toArray();
+
+  const pendingCrops = data.map((crop) => {
+    let status: 'Sprout' | 'Seedling' | 'Growth' | 'Harvest';
+    const plantedAt = crop.plantedAt;
+    const timeElapsed = Date.now() - plantedAt;
+    const sproutTime = cropDetails[crop.cropType].growthStages.Sprout[1];
+    const isSproutStage = isBetween(timeElapsed, [0, sproutTime]);
+
+    const seedlingTime = cropDetails[crop.cropType].growthStages.Seedling[1];
+    const isSeedlingStage = isBetween(timeElapsed, [sproutTime, seedlingTime]);
+
+    const growthTime = cropDetails[crop.cropType].growthStages.Growth[1];
+    const isGrowthStage = isBetween(timeElapsed, [seedlingTime, growthTime]);
+
+    const harvestTime = cropDetails[crop.cropType].growthStages.Harvest[1];
+    const isHarvestStage = isBetween(timeElapsed, [growthTime, harvestTime]);
+
+    if (isHarvestStage) {
+      status = 'Harvest';
+    } else if (isGrowthStage) {
+      status = 'Growth';
+    } else if (isSeedlingStage) {
+      status = 'Seedling';
+    } else {
+      status = 'Sprout';
+    }
+
+    let nextPhaseIn: number;
+    if (status === 'Growth') {
+      nextPhaseIn = Math.abs(growthTime - timeElapsed);
+    } else if (status === 'Seedling') {
+      nextPhaseIn = Math.abs(seedlingTime - timeElapsed);
+    } else if (status === 'Sprout') {
+      nextPhaseIn = Math.abs(sproutTime - timeElapsed);
+    } else {
+      nextPhaseIn = 0;
+    }
+
+    return { ...crop, status, nextPhaseIn };
+  });
+  return pendingCrops;
+};
+
+export const getCropYield = async (address: string, id: number) => {
+  const pendingCrops = await getPendingCrops(address);
+
+  const cropToHarvest = pendingCrops.find((c) => c.id === id);
+  if (!cropToHarvest) {
+    throw new Error('Crop not found');
+  }
+  const isReady = cropToHarvest.status === 'Harvest';
+
+  if (!isReady) {
+    throw new Error('Crop not ready to harvest');
+  }
+
+  const crop = cropToHarvest.cropType;
+
+  let totalCropYield = 0;
+  let totalSeedYield = 0;
+
+  const totalSeeds = cropToHarvest.tiles.length;
+  for (let i = 0; i < totalSeeds; i++) {
+    // Get random number between min and max
+    totalCropYield +=
+      cropDetails[crop].yieldVariance.min +
+      Phaser.Math.Between(
+        cropDetails[crop].yieldVariance.min,
+        cropDetails[crop].yieldVariance.max
+      );
+    totalSeedYield += Phaser.Math.Between(
+      cropDetails[crop].yieldVariance.min,
+      cropDetails[crop].yieldVariance.max
+    );
+  }
+
+  console.log('Total Crop yield', totalCropYield);
+  console.log('Total Seed yield', totalSeedYield);
+
+  return {
+    crop,
+    totalCropYield,
+    totalSeedYield,
+  };
+};
+
+export const checkIfCanPlant = async (
+  address: string,
+  crop: CropType,
+  tiles: { x: number; y: number }[]
+) => {
+  if (tiles.length === 0) {
+    return;
+  }
+
+  const existingCrops = await getPendingCrops(address);
+  const totalOccupiedTiles = existingCrops.reduce((acc, crop) => {
+    return acc + crop.tiles.length;
+  }, 0);
+
+  if (35 - totalOccupiedTiles < tiles.length) {
+    throw new Error('Not enough space');
+  }
+
+  return {
+    crop,
+    tiles,
+  };
 };

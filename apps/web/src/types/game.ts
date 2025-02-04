@@ -190,3 +190,34 @@ export type NPCHarvestArgs = z.infer<typeof harvestSchema>['args'];
 export type NPCBuyArgs = z.infer<typeof buySchema>['args'];
 export type NPCSellArgs = z.infer<typeof sellSchema>['args'];
 export type NPCAction = z.infer<typeof npcActionSchema>;
+
+export type Season = 'spring' | 'summer' | 'autumn' | 'winter';
+export interface Crop {
+  name: CropType;
+  seedName: string;
+  season: Season;
+  quality: 'low' | 'medium' | 'high'; // Higher quality = higher profit
+  yieldVariance: {
+    min: number; // Minimum yield per seed
+    max: number; // Maximum yield per seed
+  };
+  seasonalBoost: {
+    idealWeather: Season[]; // Boosts growth if the weather matches
+    growthSpeedMultiplier: number; // Example: 1.2x speed in rainy weather
+  };
+  // Growth Stage as per time elapsed [start, end]
+  growthStages: {
+    Sprout: [number, number];
+    Seedling: [number, number];
+    Growth: [number, number];
+    Harvest: [number, number];
+  };
+  // Watering requirement between growing and readyToHarvest
+  wateringRequirement: {
+    frequency: number;
+  };
+  rotationBenefit: {
+    after: CropType; // If this crop is planted before this crop
+    percentageMultiplier: number; // Example: 1.2x yield if planted after wheat
+  }[];
+}

@@ -28,7 +28,10 @@ The positions in the game are as follows:
 
 The trader shop costs are as follows:
 
-${JSON.stringify(itemCosts)}`;
+${JSON.stringify(itemCosts)}
+
+Generate a json response with the following format: { response: string, actions: {action, args}[] } and nothing else.
+`;
 
 export const getPlayerDetailsMessage = async (playerAddress: string) => {
   const pendingCrops = await db.crops
