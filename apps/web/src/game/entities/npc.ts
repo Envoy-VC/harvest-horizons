@@ -29,6 +29,7 @@ export class NPC extends NPCAbstract {
       const zoom = scene.cameras.main.zoom;
       const tileX = Math.floor(pointer.worldX / (scene.tileSize * zoom));
       const tileY = Math.floor(pointer.worldY / (scene.tileSize * zoom));
+      console.log(tileX, tileY);
       await this.moveTo({ tileX, tileY, scene });
       console.log('Reached Destination');
     });

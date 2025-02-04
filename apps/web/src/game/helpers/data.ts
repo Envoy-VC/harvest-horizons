@@ -22,3 +22,9 @@ export const CropTiles = {
 
 export type CropType = keyof typeof CropTiles;
 export type GrowthStage = 'Sprout' | 'Seedling' | 'Growth' | 'Harvest';
+
+export const Position = {
+  TraderHouse: { x: 5, y: 6 },
+  FarmerHouse: { x: 26, y: 7 },
+  Farm: { x: 24, y: 13 },
+};

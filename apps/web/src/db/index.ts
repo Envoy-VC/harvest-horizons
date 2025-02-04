@@ -1,5 +1,5 @@
 import Dexie, { type EntityTable } from 'dexie';
-import type { CropType } from '~/types/game';
+import type { CropType, NPCActionArgs, NPCActionType } from '~/types/game';
 
 interface CropsPlanted {
   id: number;
@@ -18,12 +18,23 @@ interface DailyClaims {
   claimedAt: number;
 }
 
+interface Task {
+  id: number;
+  playerAddress: string;
+  taskType: NPCActionType;
+  args: NPCActionArgs;
+  completed: boolean;
+  createdAt: number;
+}
+
 export const db = new Dexie('HarvestHorizonDB') as Dexie & {
   crops: EntityTable<CropsPlanted, 'id'>;
   dailyClaims: EntityTable<DailyClaims, 'id'>;
+  tasks: EntityTable<Task, 'id'>;
 };
 
 db.version(1).stores({
   crops: '++id, address',
-  dailyClaims: '++id, playerAddress, dayNumber',
+  dailyClaims: '++id, playerAddress, dayNumber, weekNumber',
+  tasks: '++id, playerAddress',
 });

@@ -4,10 +4,11 @@ import GameMap from 'public/assets/map.json';
 
 import { Pathfinder } from '../classes';
 import type { GameSceneAbstract, NPCAbstract } from '../classes/abstract';
-import { Farm, InteractionText, NPC, Player } from '../entities';
+import { Farm, InteractionText, NPC, Player, TaskScheduler } from '../entities';
 import { type CursorKeys, createCursorKeys } from '../helpers/movement';
 
 import type { GameSceneProps } from '~/types/game';
+import { taskEmitter } from '../emitter';
 import { world } from '../state';
 
 export class GameScene extends Phaser.Scene implements GameSceneAbstract {
@@ -20,6 +21,7 @@ export class GameScene extends Phaser.Scene implements GameSceneAbstract {
   pathfinder!: Pathfinder;
   farm!: Farm;
   interactionText!: InteractionText;
+  taskScheduler!: TaskScheduler;
   isModalOpen: boolean;
   tileSize: number;
   config: GameSceneProps['config'];
@@ -122,6 +124,14 @@ export class GameScene extends Phaser.Scene implements GameSceneAbstract {
 
     // Set Interaction Text
     this.interactionText = new InteractionText(this);
+
+    // Task Manager
+    this.taskScheduler = new TaskScheduler();
+
+    taskEmitter.on('add-task', (task) => {
+      console.log('Event caught');
+      this.taskScheduler.addTask({ task, scene: this });
+    });
   }
 
   update(time: number, delta: number) {
