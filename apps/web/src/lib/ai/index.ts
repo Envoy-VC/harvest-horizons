@@ -26,12 +26,8 @@ export const generateActions = async (
 ) => {
   try {
     const message = await getPlayerDetailsMessage(playerAddress);
-    console.log(
-      `${GENERATE_ACTIONS_SYSTEM_PROMPT} \n\n ${message} \n\n ${prompt}`
-    );
     const data = await generateObject({
       model: model,
-      maxTokens: 2048,
       messages: [
         {
           role: 'system',
@@ -43,6 +39,7 @@ export const generateActions = async (
         },
       ],
       schema: z.object({
+        message: z.string().describe('A response given for the message'),
         actions: z.array(npcActionSchema),
       }),
     });

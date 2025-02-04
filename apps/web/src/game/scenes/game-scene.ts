@@ -22,14 +22,14 @@ export class GameScene extends Phaser.Scene implements GameSceneAbstract {
   farm!: Farm;
   interactionText!: InteractionText;
   taskScheduler!: TaskScheduler;
-  isModalOpen: boolean;
+  keyboardInteractionsDisabled: boolean;
   tileSize: number;
   config: GameSceneProps['config'];
 
   constructor(props: GameSceneProps) {
     super({ key: 'GameScene' });
     this.config = props.config;
-    this.isModalOpen = false;
+    this.keyboardInteractionsDisabled = false;
     this.tileSize = 16;
   }
 
@@ -142,10 +142,12 @@ export class GameScene extends Phaser.Scene implements GameSceneAbstract {
 
     this.interactionText.update({ scene: this, time, delta });
 
-    if (world.isInteractionModalOpen !== this.isModalOpen) {
-      this.isModalOpen = world.isInteractionModalOpen;
+    if (
+      world.keyboardInteractionsDisabled !== this.keyboardInteractionsDisabled
+    ) {
+      this.keyboardInteractionsDisabled = world.keyboardInteractionsDisabled;
 
-      if (world.isInteractionModalOpen) {
+      if (world.keyboardInteractionsDisabled) {
         // Disable keyboard input when the modal is open
         this.input.keyboard?.disableGlobalCapture();
         // biome-ignore lint/style/noNonNullAssertion: safe

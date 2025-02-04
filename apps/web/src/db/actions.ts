@@ -72,3 +72,12 @@ export const claimDailyReward = async (
     claimedAt: Date.now(),
   });
 };
+
+export const getChats = async (playerAddress: string) => {
+  const res = await db.chats
+    .where('playerAddress')
+    .equals(playerAddress)
+    .sortBy('createdAt');
+
+  return res;
+};

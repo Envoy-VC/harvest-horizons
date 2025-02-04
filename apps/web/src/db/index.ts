@@ -23,7 +23,16 @@ interface Task {
   playerAddress: string;
   taskType: NPCActionType;
   args: NPCActionArgs;
-  completed: boolean;
+  message: string;
+  status: 'pending' | 'completed' | 'failed';
+  createdAt: number;
+}
+
+interface Chat {
+  id: number;
+  role: 'user' | 'assistant';
+  playerAddress: string;
+  message: string;
   createdAt: number;
 }
 
@@ -31,10 +40,12 @@ export const db = new Dexie('HarvestHorizonDB') as Dexie & {
   crops: EntityTable<CropsPlanted, 'id'>;
   dailyClaims: EntityTable<DailyClaims, 'id'>;
   tasks: EntityTable<Task, 'id'>;
+  chats: EntityTable<Chat, 'id'>;
 };
 
 db.version(1).stores({
   crops: '++id, address, playerAddress',
   dailyClaims: '++id, playerAddress, dayNumber, weekNumber',
   tasks: '++id, playerAddress',
+  chats: '++id, playerAddress, role',
 });

@@ -65,5 +65,7 @@ To plant a specific crop, the player must have the required amount of seeds in t
 Remember that always move first to desired location before starting an action. and after acquiring or using any item you perform a atomic action  update the player inventory using 'updateInventory' action. this is compulsory. For example if you are planting a seed, then update the inventory to remove the used amount from inventory.
 
 If the player does not have enough seeds, they can either buy the seeds from a trader shop using coins. If not enough coins are available, then ignore that action. Always check inventory for available items before performing any action, if not available move to trader shop and purchase those items.
+
+Also give a small message for each action, what it does and why it is done. Also respond with a response message for the entire conversation.
 `;
 };

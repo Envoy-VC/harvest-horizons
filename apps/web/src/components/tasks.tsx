@@ -1,3 +1,5 @@
+import { observer } from 'mobx-react-lite';
+import { useState } from 'react';
 import {
   Sheet,
   SheetContent,
@@ -6,12 +8,24 @@ import {
   SheetTitle,
   SheetTrigger,
 } from '~/components/ui/sheet';
+import { world } from '~/game/state';
 import { IconButton } from './ui/icon-button';
 
-export const TasksButton = () => {
+export const TasksButton = observer(() => {
+  const [open, setOpen] = useState<boolean>(false);
+
+  const onOpenChange = (open: boolean) => {
+    if (open) {
+      setOpen(true);
+      world.disableKeyboardInteractions();
+    } else {
+      setOpen(false);
+      world.enableKeyboardInteractions();
+    }
+  };
   return (
     <div className='absolute top-4 right-36'>
-      <Sheet>
+      <Sheet open={open} onOpenChange={onOpenChange}>
         <SheetTrigger>
           <IconButton icon='cart-button' className='h-10 w-10' />
         </SheetTrigger>
@@ -27,4 +41,4 @@ export const TasksButton = () => {
       </Sheet>
     </div>
   );
-};
+});

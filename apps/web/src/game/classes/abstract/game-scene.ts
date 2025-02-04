@@ -14,7 +14,7 @@ export abstract class GameSceneAbstract extends Phaser.Scene {
   abstract cursors: CursorKeys;
   abstract pathfinder: Pathfinder;
   abstract interactionText: InteractionText;
-  abstract isModalOpen: boolean;
+  abstract keyboardInteractionsDisabled: boolean;
   abstract tileSize: number;
   abstract farm: Farm;
 }

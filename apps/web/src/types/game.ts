@@ -56,6 +56,11 @@ export interface PlantCropProps {
 
 const moveSchema = z.object({
   action: z.literal('move'),
+  message: z
+    .string()
+    .describe(
+      'A small message to display to the player, related to the action why it was taken'
+    ),
   args: z.object({
     x: z.number().describe('The x coordinate of the tile to move to'),
     y: z.number().describe('The y coordinate of the tile to move to'),
@@ -64,6 +69,11 @@ const moveSchema = z.object({
 
 const farmSchema = z.object({
   action: z.literal('plant'),
+  message: z
+    .string()
+    .describe(
+      'A small message to display to the player, related to the action why it was taken'
+    ),
   args: z.object({
     seedType: z
       .union([
@@ -78,6 +88,11 @@ const farmSchema = z.object({
 
 const harvestSchema = z.object({
   action: z.literal('harvest'),
+  message: z
+    .string()
+    .describe(
+      'A small message to display to the player, related to the action why it was taken'
+    ),
   args: z.object({
     cropType: z
       .union([z.literal('carrot'), z.literal('potato'), z.literal('tomato')])
@@ -88,6 +103,11 @@ const harvestSchema = z.object({
 
 const buySchema = z.object({
   action: z.literal('buy'),
+  message: z
+    .string()
+    .describe(
+      'A small message to display to the player, related to the action why it was taken'
+    ),
   args: z.object({
     cropType: z
       .union([
@@ -105,6 +125,11 @@ const buySchema = z.object({
 
 const sellSchema = z.object({
   action: z.literal('sell'),
+  message: z
+    .string()
+    .describe(
+      'A small message to display to the player, related to the action why it was taken'
+    ),
   args: z.object({
     cropType: z
       .union([
@@ -122,6 +147,11 @@ const sellSchema = z.object({
 
 const updateInventorySchema = z.object({
   action: z.literal('updateInventory'),
+  message: z
+    .string()
+    .describe(
+      'A small message to display to the player, related to the action why it was taken'
+    ),
   args: z.array(
     z.object({
       itemType: z
