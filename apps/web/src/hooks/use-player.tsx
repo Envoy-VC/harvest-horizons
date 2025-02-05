@@ -59,13 +59,13 @@ export const usePlayer = () => {
       }
       await Actions.checkIfCanPlant(address, crop.type, crop.tiles);
       console.log(crop.tiles);
-      //   await updateInventory(address, [
-      //     {
-      //       type: `${crop.type}-seeds`,
-      //       amount: crop.tiles.length,
-      //       operation: 'remove',
-      //     },
-      //   ]);
+      await updateInventory(address, [
+        {
+          type: `${crop.type}-seeds`,
+          amount: crop.tiles.length,
+          operation: 'remove',
+        },
+      ]);
       await db.crops.add({
         cropType: crop.type,
         tiles: crop.tiles.map(({ x, y }) => [x, y]),

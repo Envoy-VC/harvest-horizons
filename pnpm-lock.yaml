@@ -35,9 +35,12 @@ importers:
 
   apps/web:
     dependencies:
-      '@ai-sdk/deepseek':
-        specifier: ^0.1.8
-        version: 0.1.8(zod@3.24.1)
+      '@goat-sdk/adapter-vercel-ai':
+        specifier: ^0.2.7
+        version: 0.2.7(@goat-sdk/core@0.4.6(zod@3.24.1))(ai@4.1.17(react@18.3.1)(zod@3.24.1))(zod@3.24.1)
+      '@goat-sdk/wallet-viem':
+        specifier: ^0.2.7
+        version: 0.2.7(@goat-sdk/wallet-evm@0.2.7(@goat-sdk/core@0.4.6(zod@3.24.1))(bufferutil@4.0.9)(typescript@5.7.3)(utf-8-validate@5.0.10))(viem@2.22.19(bufferutil@4.0.9)(typescript@5.7.3)(utf-8-validate@5.0.10)(zod@3.24.1))
       '@radix-ui/react-dialog':
         specifier: ^1.1.5
         version: 1.1.5(@types/react-dom@18.3.5(@types/react@18.3.18))(@types/react@18.3.18)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -104,9 +107,6 @@ importers:
       ollama-ai-provider:
         specifier: ^1.2.0
         version: 1.2.0(zod@3.24.1)
-      p-queue:
-        specifier: ^8.1.0
-        version: 8.1.0
       pathfinding:
         specifier: ^0.4.18
         version: 0.4.18
@@ -237,18 +237,6 @@ packages:
 
   '@adraffy/ens-normalize@1.11.0':
     resolution: {integrity: sha512-/3DDPKHqqIqxUULp8yP4zODUY1i+2xvVWsv8A79xGWdCAG+8sb0hRh0Rk2QyOJUnnbyPUAZYcpBuRe3nS2OIUg==}
-
-  '@ai-sdk/deepseek@0.1.8':
-    resolution: {integrity: sha512-ZnugEqmkscB0an46I0Z6Ppor8YwOC2bIhWXkivkGbVdpQgpx43cPBrD3lyOyNEHIFwHtcrJF13S+4FNPzR0Gng==}
-    engines: {node: '>=18'}
-    peerDependencies:
-      zod: ^3.0.0
-
-  '@ai-sdk/openai-compatible@0.1.8':
-    resolution: {integrity: sha512-o2WeZmkOgaaEHAIZfAdlAASotNemhWBzupUp7ql/vBKIrPDctbQS4K7XOvG7EZ1dshn0TxB+Ur7Q8HoWSeWPmA==}
-    engines: {node: '>=18'}
-    peerDependencies:
-      zod: ^3.0.0
 
   '@ai-sdk/provider-utils@2.1.6':
     resolution: {integrity: sha512-Pfyaj0QZS22qyVn5Iz7IXcJ8nKIKlu2MeSAdKJzTwkAks7zdLaKVB+396Rqcp1bfQnxl7vaduQVMQiXUrgK8Gw==}
@@ -964,6 +952,13 @@ packages:
   '@ethersproject/web@5.7.1':
     resolution: {integrity: sha512-Gueu8lSvyjBWL4cYsWsjh6MtMwM0+H4HvqFPZfB6dV8ctbP9zFAO73VG1cMWae0FLPCtz0peKPpZY8/ugJJX2w==}
 
+  '@goat-sdk/adapter-vercel-ai@0.2.7':
+    resolution: {integrity: sha512-y6W7ZOpe4bh7PiafzcY87RsgbVBr6ESKGdxLbJ1bQNbm/6DPJyXC8lpRi4zy+OOzbHtwupCl50w7jteJuwf6XA==}
+    peerDependencies:
+      '@goat-sdk/core': 0.4.6
+      ai: 4.0.3
+      zod: ^3.0.0
+
   '@goat-sdk/core@0.4.6':
     resolution: {integrity: sha512-jFk0G9d/WlR1juIhCKtgEr7HBi2v7/veqouP1Zm1KC6EU2bNHXMYrh2TkeO1wjep3ur1MK4DDY1c+rS4WSY/7g==}
     peerDependencies:
@@ -973,6 +968,12 @@ packages:
     resolution: {integrity: sha512-1lWDAn/QAnGb6k7Fd8pS6g6Rz9jU2HB5mS/auxRyex9ohRnYlCluFz9aBo0G9rPVfPrviyMbVH+yCB1Fl3VxPg==}
     peerDependencies:
       '@goat-sdk/core': 0.4.6
+
+  '@goat-sdk/wallet-viem@0.2.7':
+    resolution: {integrity: sha512-PYH6HSQ1/A87zeluRqrRop+eaC8i//EUEHgRd9FvdI8prp+bHI2OFTk/h5AdH37cowCUUxHjUd9rtuBQkxMusQ==}
+    peerDependencies:
+      '@goat-sdk/wallet-evm': 0.2.7
+      viem: 2.21.49
 
   '@humanwhocodes/config-array@0.13.0':
     resolution: {integrity: sha512-DZLEEqFWQFiyK6h5YIeynKx7JlvCYWL0cImfSRXZ9l4Sg2efkFGTuFf6vzXjK1cq6IYkU+Eg/JizXw+TD2vRNw==}
@@ -4015,14 +4016,6 @@ packages:
     resolution: {integrity: sha512-wPrq66Llhl7/4AGC6I+cqxT07LhXvWL08LNXz1fENOw0Ap4sRZZ/gZpTTJ5jpurzzzfS2W/Ge9BY3LgLjCShcw==}
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
 
-  p-queue@8.1.0:
-    resolution: {integrity: sha512-mxLDbbGIBEXTJL0zEx8JIylaj3xQ7Z/7eEVjcF9fJX4DBiH9oqe+oahYnlKKxm0Ci9TlWTyhSHgygxMxjIB2jw==}
-    engines: {node: '>=18'}
-
-  p-timeout@6.1.4:
-    resolution: {integrity: sha512-MyIV3ZA/PmyBN/ud8vV9XzwTrNtR4jFrObymZYnZqMmW0zA8Z17vnT0rBgFE/TlohB+YCHqXMgZzb3Csp49vqg==}
-    engines: {node: '>=14.16'}
-
   p-try@2.2.0:
     resolution: {integrity: sha512-R4nPAVTAU0B9D35/Gk3uJf/7XYbQcyohSKdvAxIRSNghFl4e71hVoGnBNQz9cWaXxO2I10KTC+3jMdvvoKw6dQ==}
     engines: {node: '>=6'}
@@ -5333,19 +5326,6 @@ snapshots:
 
   '@adraffy/ens-normalize@1.11.0': {}
 
-  '@ai-sdk/deepseek@0.1.8(zod@3.24.1)':
-    dependencies:
-      '@ai-sdk/openai-compatible': 0.1.8(zod@3.24.1)
-      '@ai-sdk/provider': 1.0.7
-      '@ai-sdk/provider-utils': 2.1.6(zod@3.24.1)
-      zod: 3.24.1
-
-  '@ai-sdk/openai-compatible@0.1.8(zod@3.24.1)':
-    dependencies:
-      '@ai-sdk/provider': 1.0.7
-      '@ai-sdk/provider-utils': 2.1.6(zod@3.24.1)
-      zod: 3.24.1
-
   '@ai-sdk/provider-utils@2.1.6(zod@3.24.1)':
     dependencies:
       '@ai-sdk/provider': 1.0.7
@@ -6078,6 +6058,12 @@ snapshots:
       '@ethersproject/properties': 5.7.0
       '@ethersproject/strings': 5.7.0
 
+  '@goat-sdk/adapter-vercel-ai@0.2.7(@goat-sdk/core@0.4.6(zod@3.24.1))(ai@4.1.17(react@18.3.1)(zod@3.24.1))(zod@3.24.1)':
+    dependencies:
+      '@goat-sdk/core': 0.4.6(zod@3.24.1)
+      ai: 4.1.17(react@18.3.1)(zod@3.24.1)
+      zod: 3.24.1
+
   '@goat-sdk/core@0.4.6(zod@3.24.1)':
     dependencies:
       reflect-metadata: 0.2.2
@@ -6093,6 +6079,11 @@ snapshots:
       - bufferutil
       - typescript
       - utf-8-validate
+
+  '@goat-sdk/wallet-viem@0.2.7(@goat-sdk/wallet-evm@0.2.7(@goat-sdk/core@0.4.6(zod@3.24.1))(bufferutil@4.0.9)(typescript@5.7.3)(utf-8-validate@5.0.10))(viem@2.22.19(bufferutil@4.0.9)(typescript@5.7.3)(utf-8-validate@5.0.10)(zod@3.24.1))':
+    dependencies:
+      '@goat-sdk/wallet-evm': 0.2.7(@goat-sdk/core@0.4.6(zod@3.24.1))(bufferutil@4.0.9)(typescript@5.7.3)(utf-8-validate@5.0.10)
+      viem: 2.22.19(bufferutil@4.0.9)(typescript@5.7.3)(utf-8-validate@5.0.10)(zod@3.24.1)
 
   '@humanwhocodes/config-array@0.13.0':
     dependencies:
@@ -10185,13 +10176,6 @@ snapshots:
   p-locate@6.0.0:
     dependencies:
       p-limit: 4.0.0
-
-  p-queue@8.1.0:
-    dependencies:
-      eventemitter3: 5.0.1
-      p-timeout: 6.1.4
-
-  p-timeout@6.1.4: {}
 
   p-try@2.2.0: {}
 

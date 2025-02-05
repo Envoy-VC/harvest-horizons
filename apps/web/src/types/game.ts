@@ -185,10 +185,14 @@ export const npcActionSchema = z.union([
 export type NPCActionType = z.infer<typeof npcActionSchema>['action'];
 export type NPCActionArgs = z.infer<typeof npcActionSchema>['args'];
 export type NPCMoveArgs = z.infer<typeof moveSchema>['args'];
-export type NPCFarmArgs = z.infer<typeof farmSchema>['args'];
+export type NPCPlantArgs = z.infer<typeof farmSchema>['args'];
 export type NPCHarvestArgs = z.infer<typeof harvestSchema>['args'];
 export type NPCBuyArgs = z.infer<typeof buySchema>['args'];
 export type NPCSellArgs = z.infer<typeof sellSchema>['args'];
+export type NPCUpdateInventoryArgs = z.infer<
+  typeof updateInventorySchema
+>['args'];
+
 export type NPCAction = z.infer<typeof npcActionSchema>;
 
 export type Season = 'spring' | 'summer' | 'autumn' | 'winter';

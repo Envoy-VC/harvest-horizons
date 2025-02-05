@@ -1,3 +1,4 @@
+import { useLiveQuery } from 'dexie-react-hooks';
 import { observer } from 'mobx-react-lite';
 import { useState } from 'react';
 import { toast } from 'sonner';
@@ -9,9 +10,9 @@ import {
   SheetTitle,
   SheetTrigger,
 } from '~/components/ui/sheet';
-import type { Task } from '~/db';
 import { clearTasks } from '~/db/actions';
-// import { getTasks } from '~/db/actions';
+import { getTasks } from '~/db/actions';
+import { taskEmitter } from '~/game/emitter';
 import { world } from '~/game/state';
 import { Button } from './ui/button';
 import { IconButton } from './ui/icon-button';
@@ -30,13 +31,11 @@ export const TasksButton = observer(() => {
     }
   };
 
-  // const tasks = useLiveQuery(() => getTasks(address ?? '0x0'));
+  const tasks = useLiveQuery(() => getTasks(address ?? '0x0'));
 
   const onExecute = () => {
     try {
-      // Schedule pending tasks in Task Scheduler
-      // Start Executing tasks
-      console.log('ad');
+      taskEmitter.emit('start-tasks', null);
     } catch (error: unknown) {
       console.log(error);
       toast.error((error as Error).message);
@@ -49,51 +48,11 @@ export const TasksButton = observer(() => {
         throw new Error('Please Connect your wallet');
       }
       await clearTasks(address);
-      console.log('ad');
     } catch (error: unknown) {
       console.log(error);
       toast.error((error as Error).message);
     }
   };
-
-  const tasks: Task[] = [
-    {
-      id: 1,
-      playerAddress: '0x0',
-      taskType: 'move',
-      args: { x: 5, y: 12 },
-      message: 'Move to Trader House',
-      status: 'pending',
-      createdAt: 1,
-    },
-    {
-      id: 2,
-      playerAddress: '0x0',
-      taskType: 'buy',
-      args: { cropType: 'carrot-seeds', amount: 10 },
-      message: 'Buy 10 carrot seeds',
-      status: 'completed',
-      createdAt: 2,
-    },
-    {
-      id: 3,
-      playerAddress: '0x0',
-      taskType: 'move',
-      args: { x: 5, y: 12 },
-      message: 'Move to Farm to plant seeds',
-      status: 'failed',
-      createdAt: 3,
-    },
-    {
-      id: 4,
-      playerAddress: '0x0',
-      taskType: 'plant',
-      args: { seedType: 'carrot-seeds', amount: 10 },
-      message: 'Plant 10 carrot seeds',
-      status: 'pending',
-      createdAt: 4,
-    },
-  ];
 
   return (
     <div className='absolute top-4 right-36'>
@@ -107,7 +66,7 @@ export const TasksButton = observer(() => {
           </SheetHeader>
           <div className='flex h-full w-full flex-col justify-between py-4'>
             <div className='flex min-h-[92%] w-full flex-col gap-2'>
-              {tasks.map((task) => {
+              {(tasks ?? []).map((task) => {
                 let icon: string;
                 if (task.status === 'pending') {
                   icon = 'pending';
@@ -122,7 +81,10 @@ export const TasksButton = observer(() => {
                     className='flex flex-row items-center justify-between gap-2 rounded-xl border-2 border-[#A85F46] px-4 pt-2'
                   >
                     <div className='text-wrap text-sm'>{task.message}</div>
-                    <IconButton icon={icon} className='mb-2 h-8 w-8' />
+                    <IconButton
+                      icon={icon}
+                      className='mb-2 h-8 min-h-8 w-8 min-w-8'
+                    />
                   </div>
                 );
               })}

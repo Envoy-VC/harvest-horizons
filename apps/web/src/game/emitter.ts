@@ -14,7 +14,8 @@ export type FarmerEmitterEvents = {
 };
 
 export type TaskManagerEmitter = {
-  'add-task': NPCAction;
+  'add-tasks': { task: NPCAction; id: number }[];
+  'start-tasks': null;
 };
 
 export const farmerEmitter = mitt<FarmerEmitterEvents>();

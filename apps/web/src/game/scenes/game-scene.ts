@@ -128,9 +128,13 @@ export class GameScene extends Phaser.Scene implements GameSceneAbstract {
     // Task Manager
     this.taskScheduler = new TaskScheduler();
 
-    taskEmitter.on('add-task', (task) => {
+    taskEmitter.on('add-tasks', (tasks) => {
       console.log('Event caught');
-      this.taskScheduler.addTask({ task, scene: this });
+      this.taskScheduler.addTasks({ tasks, scene: this });
+    });
+
+    taskEmitter.on('start-tasks', () => {
+      this.taskScheduler.startTasks();
     });
   }
 

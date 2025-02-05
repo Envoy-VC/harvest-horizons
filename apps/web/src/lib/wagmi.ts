@@ -22,3 +22,15 @@ export const updateInventory = async (
   });
   await waitForTransactionReceipt(wagmiAdapter.wagmiConfig, { hash });
 };
+
+import { http, createWalletClient } from 'viem';
+import { privateKeyToAccount } from 'viem/accounts';
+import { avalancheFuji } from 'viem/chains';
+
+const account = privateKeyToAccount(import.meta.env.VITE_PRIVATE_KEY);
+
+export const walletClient = createWalletClient({
+  account,
+  chain: avalancheFuji,
+  transport: http(),
+});

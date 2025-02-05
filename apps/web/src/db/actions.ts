@@ -123,7 +123,6 @@ export const getPendingCrops = async (playerAddress: string) => {
     const plantedAt = crop.plantedAt;
     const timeElapsed = Date.now() - plantedAt;
     const sproutTime = cropDetails[crop.cropType].growthStages.Sprout[1];
-    const isSproutStage = isBetween(timeElapsed, [0, sproutTime]);
 
     const seedlingTime = cropDetails[crop.cropType].growthStages.Seedling[1];
     const isSeedlingStage = isBetween(timeElapsed, [sproutTime, seedlingTime]);
