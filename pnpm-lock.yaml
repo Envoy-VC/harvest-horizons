@@ -35,6 +35,9 @@ importers:
 
   apps/web:
     dependencies:
+      '@ai-sdk/mistral':
+        specifier: ^1.1.6
+        version: 1.1.6(zod@3.24.1)
       '@goat-sdk/adapter-vercel-ai':
         specifier: ^0.2.7
         version: 0.2.7(@goat-sdk/core@0.4.6(zod@3.24.1))(ai@4.1.17(react@18.3.1)(zod@3.24.1))(zod@3.24.1)
@@ -237,6 +240,12 @@ packages:
 
   '@adraffy/ens-normalize@1.11.0':
     resolution: {integrity: sha512-/3DDPKHqqIqxUULp8yP4zODUY1i+2xvVWsv8A79xGWdCAG+8sb0hRh0Rk2QyOJUnnbyPUAZYcpBuRe3nS2OIUg==}
+
+  '@ai-sdk/mistral@1.1.6':
+    resolution: {integrity: sha512-HrZGZuf1BLcYurpysYepYp4ntmzRMAoWcazXtv+Gv/2cNlqj1yKj9Mso4LSgGp7+99gDB8l5qTcvjzpcNc0Xbg==}
+    engines: {node: '>=18'}
+    peerDependencies:
+      zod: ^3.0.0
 
   '@ai-sdk/provider-utils@2.1.6':
     resolution: {integrity: sha512-Pfyaj0QZS22qyVn5Iz7IXcJ8nKIKlu2MeSAdKJzTwkAks7zdLaKVB+396Rqcp1bfQnxl7vaduQVMQiXUrgK8Gw==}
@@ -5325,6 +5334,12 @@ packages:
 snapshots:
 
   '@adraffy/ens-normalize@1.11.0': {}
+
+  '@ai-sdk/mistral@1.1.6(zod@3.24.1)':
+    dependencies:
+      '@ai-sdk/provider': 1.0.7
+      '@ai-sdk/provider-utils': 2.1.6(zod@3.24.1)
+      zod: 3.24.1
 
   '@ai-sdk/provider-utils@2.1.6(zod@3.24.1)':
     dependencies:

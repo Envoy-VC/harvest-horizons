@@ -1,4 +1,8 @@
-import { ollama } from 'ollama-ai-provider';
+import { createMistral } from '@ai-sdk/mistral';
+
+const mistral = createMistral({
+  apiKey: import.meta.env.VITE_MISTRAL_API_KEY,
+});
 
 import { generateObject } from 'ai';
 import {
@@ -9,7 +13,8 @@ import {
 import { z } from 'zod';
 import { npcActionSchema } from '~/types/game';
 
-export const model = ollama('llama3', { structuredOutputs: true });
+// export const model = ollama('llama3', { structuredOutputs: true });
+export const model = mistral('mistral-large-latest');
 
 export const generateActions = async (
   prompt: string,

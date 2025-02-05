@@ -1,7 +1,7 @@
 import { readContract } from '@wagmi/core';
 import { itemsMapReverse } from 'harvest-horizon-goat-plugin';
 import { harvestHorizonsConfig } from '~/data/contract';
-import { db } from '~/db';
+import { getPendingCrops } from '~/db/actions';
 import { Position, itemCosts } from '~/game/helpers/data';
 import { wagmiAdapter } from '~/providers/web3-provider';
 
@@ -29,18 +29,12 @@ The positions in the game are as follows:
 The trader shop costs are as follows:
 
 ${JSON.stringify(itemCosts)}
-
-Generate a json response with the following format: { response: string, actions: {action, args}[] } and nothing else.
 `;
 
 export const getPlayerDetailsMessage = async (playerAddress: string) => {
-  const pendingCrops = await db.crops
-    .where('playerAddress')
-    .equals(playerAddress)
-    .and((crop) => {
-      return crop.harvestAt === null;
-    })
-    .toArray();
+  const pendingCrops = (await getPendingCrops(playerAddress)).filter(
+    (c) => c.harvestAt === null
+  );
 
   const res = await readContract(wagmiAdapter.wagmiConfig, {
     ...harvestHorizonsConfig,
@@ -61,7 +55,7 @@ export const getPlayerDetailsMessage = async (playerAddress: string) => {
 ${JSON.stringify(inventory.map((item) => ({ item: item.type, quantity: item.amount })))}
 
 The player has ${pendingCrops.length} pending crops:
-${pendingCrops.map((crop) => `- ${crop.cropType}: ${crop.tiles.length} | Growth Stage: `).join('\n')}
+${pendingCrops.map((crop) => `- ${crop.cropType}: ${crop.tiles.length} | Growth Stage: ${crop.status}`).join('\n')}
 
 To plant a specific crop, the player must have the required amount of seeds in their inventory, which are used to get that crop. For example if player wants to plant 'carrot', it needs carrot seeds, so check inventory for amount of carrot seeds available.
 

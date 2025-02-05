@@ -23,8 +23,8 @@ export const GameContainer = () => {
             config: {
               mapSize: { x: mapWidth, y: mapHeight },
               playerPosition: {
-                x: 700,
-                y: 400,
+                x: 175,
+                y: 250,
               },
             },
           }),
@@ -38,7 +38,6 @@ export const GameContainer = () => {
         physics: {
           default: 'arcade',
           arcade: {
-            debug: import.meta.env.DEV,
             gravity: { y: 0, x: 1 },
           },
         },

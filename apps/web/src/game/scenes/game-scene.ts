@@ -97,7 +97,7 @@ export class GameScene extends Phaser.Scene implements GameSceneAbstract {
 
     this.npcs = [];
     this.npcs.push(
-      new NPC({ x: 100, y: 100, sprite: 'farmer', speed: 50, scene: this })
+      new NPC({ x: 800, y: 200, sprite: 'farmer', speed: 50, scene: this })
     );
     for (const npc of this.npcs) {
       this.physics.add.collider(this.player.sprite, npc.sprite);

@@ -22,17 +22,17 @@ export class NPC extends NPCAbstract {
     this.sprite.setCollideWorldBounds(true);
     this.speed = speed;
     this.targetPath = [];
-    scene.input.on('pointerdown', async (pointer: Phaser.Input.Pointer) => {
-      if (this.isMoving) {
-        return;
-      }
-      const zoom = scene.cameras.main.zoom;
-      const tileX = Math.floor(pointer.worldX / (scene.tileSize * zoom));
-      const tileY = Math.floor(pointer.worldY / (scene.tileSize * zoom));
-      console.log(tileX, tileY);
-      await this.moveTo({ tileX, tileY, scene });
-      console.log('Reached Destination');
-    });
+    // scene.input.on('pointerdown', async (pointer: Phaser.Input.Pointer) => {
+    //   if (this.isMoving) {
+    //     return;
+    //   }
+    //   const zoom = scene.cameras.main.zoom;
+    //   const tileX = Math.floor(pointer.worldX / (scene.tileSize * zoom));
+    //   const tileY = Math.floor(pointer.worldY / (scene.tileSize * zoom));
+    //   console.log(tileX, tileY);
+    //   await this.moveTo({ tileX, tileY, scene });
+    //   console.log('Reached Destination');
+    // });
   }
 
   async moveTo({ tileX, tileY, scene }: MoveToProps) {

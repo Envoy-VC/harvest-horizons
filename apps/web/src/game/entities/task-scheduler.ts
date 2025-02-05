@@ -1,7 +1,7 @@
 import { getAccount } from '@wagmi/core';
 import { db } from '~/db';
 import * as Actions from '~/db/actions';
-import { callAgent, updateInventoryAgent } from '~/lib/ai/agent';
+import { callAgent } from '~/lib/ai/agent';
 import { sleep } from '~/lib/utils';
 import { wagmiAdapter } from '~/providers/web3-provider';
 import type {
@@ -120,8 +120,8 @@ export class TaskScheduler {
 
       const message = `Update the player inventory with the following items: ${JSON.stringify(items)}\n\nThe Player address is: ${address}`;
 
-      // const result = await callAgent(message);
-      await updateInventoryAgent(address, items);
+      await callAgent(message);
+      // await updateInventoryAgent(address, items);
       await db.tasks.update(id, {
         status: 'completed',
       });

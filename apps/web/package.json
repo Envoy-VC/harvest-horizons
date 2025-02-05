@@ -15,6 +15,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@ai-sdk/mistral": "^1.1.6",
     "@goat-sdk/adapter-vercel-ai": "^0.2.7",
     "@goat-sdk/wallet-viem": "^0.2.7",
     "@radix-ui/react-dialog": "^1.1.5",
