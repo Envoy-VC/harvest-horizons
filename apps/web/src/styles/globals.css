@@ -5,7 +5,7 @@
 body {
   margin: 0px;
   padding: 0px;
-  cursor: url("assets/ui/cursor.png"), auto;
+  cursor: url("/assets/ui/cursor.png"), auto;
   font-family: "Minecraftia", sans-serif;
 }
 
@@ -13,7 +13,7 @@ button,
 a,
 input,
 .cursor-pointer {
-  cursor: url("assets/ui/cursor-pointer.png"), auto;
+  cursor: url("/assets/ui/cursor-pointer.png"), auto;
 }
 
 *:focus {
@@ -151,7 +151,7 @@ input,
 }
 
 .sheet-background {
-  background-image: url("assets/ui/sheet.png");
+  background-image: url("/assets/ui/sheet.png");
   background-size: 114% 108%;
   background-repeat: no-repeat;
   background-position: center;
@@ -160,7 +160,7 @@ input,
 }
 
 .button-background {
-  background-image: url("assets/ui/button.png");
+  background-image: url("/assets/ui/button.png");
   background-size: 100% 100%;
   background-repeat: no-repeat;
   background-position: center;
@@ -169,7 +169,7 @@ input,
 }
 
 .dialog-background {
-  background-image: url("assets/ui/dialog.png");
+  background-image: url("/assets/ui/dialog.png");
   background-size: 100% 100%;
   background-repeat: no-repeat;
   background-position: center;
