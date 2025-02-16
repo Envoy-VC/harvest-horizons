@@ -59,7 +59,6 @@ export const usePlayer = () => {
         return;
       }
       await Actions.checkIfCanPlant(address, crop.type, crop.tiles);
-      console.log(crop.tiles);
       await updateInventory(address, [
         {
           type: `${crop.type}-seeds`,

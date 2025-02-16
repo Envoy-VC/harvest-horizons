@@ -76,11 +76,7 @@ const farmSchema = z.object({
     ),
   args: z.object({
     seedType: z
-      .union([
-        z.literal('carrot-seeds'),
-        z.literal('potato-seeds'),
-        z.literal('tomato-seeds'),
-      ])
+      .enum(['carrot-seeds', 'potato-seeds', 'tomato-seeds'])
       .describe('The seed type to plant'),
     amount: z.number().describe('The amount of seeds to plant'),
   }),
@@ -110,13 +106,13 @@ const buySchema = z.object({
     ),
   args: z.object({
     cropType: z
-      .union([
-        z.literal('carrot'),
-        z.literal('potato'),
-        z.literal('tomato'),
-        z.literal('carrot-seeds'),
-        z.literal('potato-seeds'),
-        z.literal('potato-seeds'),
+      .enum([
+        'carrot',
+        'potato',
+        'tomato',
+        'carrot-seeds',
+        'potato-seeds',
+        'tomato-seeds',
       ])
       .describe('The crop type to buy from trader shop'),
     amount: z.number().describe('The amount of crops to buy'),
@@ -132,13 +128,13 @@ const sellSchema = z.object({
     ),
   args: z.object({
     cropType: z
-      .union([
-        z.literal('carrot'),
-        z.literal('potato'),
-        z.literal('tomato'),
-        z.literal('carrot-seeds'),
-        z.literal('potato-seeds'),
-        z.literal('potato-seeds'),
+      .enum([
+        'carrot',
+        'potato',
+        'tomato',
+        'carrot-seeds',
+        'potato-seeds',
+        'tomato-seeds',
       ])
       .describe('The crop type to sell to trader shop'),
     amount: z.number().describe('The amount of crops to sell'),
@@ -155,14 +151,14 @@ const updateInventorySchema = z.object({
   args: z.array(
     z.object({
       itemType: z
-        .union([
-          z.literal('carrot'),
-          z.literal('potato'),
-          z.literal('tomato'),
-          z.literal('carrot-seeds'),
-          z.literal('potato-seeds'),
-          z.literal('potato-seeds'),
-          z.literal('coin'),
+        .enum([
+          'carrot',
+          'potato',
+          'tomato',
+          'carrot-seeds',
+          'potato-seeds',
+          'tomato-seeds',
+          'coin',
         ])
         .describe('The item type to update'),
       amount: z.number().describe('The amount of that item to update'),
@@ -173,7 +169,7 @@ const updateInventorySchema = z.object({
   ),
 });
 
-export const npcActionSchema = z.union([
+export const npcActionSchema = z.discriminatedUnion('action', [
   moveSchema,
   farmSchema,
   harvestSchema,

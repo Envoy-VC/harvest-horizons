@@ -27,24 +27,28 @@ export const generateActions = async (
   prompt: string,
   playerAddress: string
 ) => {
-  const model = getModel();
-  const message = await getPlayerDetailsMessage(playerAddress);
-  const data = await generateObject({
-    model: model,
-    messages: [
-      {
-        role: 'system',
-        content: GENERATE_ACTIONS_SYSTEM_PROMPT,
-      },
-      {
-        role: 'user',
-        content: `${message} \n\n ${prompt}`,
-      },
-    ],
-    schema: z.object({
-      response: z.string().describe('A response given for the message'),
-      actions: z.array(npcActionSchema),
-    }),
-  });
-  return data.object;
+  try {
+    const model = getModel();
+    const message = await getPlayerDetailsMessage(playerAddress);
+    const data = await generateObject({
+      model: model,
+      messages: [
+        {
+          role: 'system',
+          content: GENERATE_ACTIONS_SYSTEM_PROMPT,
+        },
+        {
+          role: 'user',
+          content: `${message} \n\n ${prompt}`,
+        },
+      ],
+      schema: z.object({
+        response: z.string().describe('A response given for the message'),
+        actions: z.array(npcActionSchema),
+      }),
+    });
+    return data.object;
+  } catch (error) {
+    console.error(error);
+  }
 };

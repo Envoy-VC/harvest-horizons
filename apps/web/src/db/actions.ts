@@ -21,14 +21,11 @@ export const getPreviousClaims = async (playerAddress: string) => {
     .and((claim) => claim.weekNumber === currentWeekNumber)
     .sortBy('claimedAt');
 
-  console.log(res);
-
   const claimedToday = res.some(
     (claim) => claim.dayNumber === currentDayOfWeek
   );
 
   const lastClaimDay = res.at(-1)?.dayNumber ?? null;
-  console.log('Last Claim Day: ', lastClaimDay);
   let nextClaimDay: number;
   if (lastClaimDay === null) {
     nextClaimDay = currentDayOfWeek;
@@ -61,8 +58,6 @@ export const claimDailyReward = async (
   if (previousClaims.some((claim) => claim.dayNumber === dayNumber)) {
     throw new Error('Already Claimed');
   }
-
-  console.log(currentDayOfWeek, dayNumber);
 
   if (currentDayOfWeek !== dayNumber) {
     throw new Error('Already Claimed Today');
@@ -191,9 +186,6 @@ export const getCropYield = async (address: string, id: number) => {
       cropDetails[crop].yieldVariance.max
     );
   }
-
-  console.log('Total Crop yield', totalCropYield);
-  console.log('Total Seed yield', totalSeedYield);
 
   return {
     crop,
