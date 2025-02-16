@@ -14,6 +14,7 @@ export const usePlayer = () => {
 
   const { data: plantedCrops, refetch: refetchPlantedCrops } = useQuery({
     queryKey: ['plantedCrops', address],
+    refetchInterval: 1000,
     queryFn: async () => {
       if (!address) {
         throw new Error('No address found');

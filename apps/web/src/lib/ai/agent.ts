@@ -25,22 +25,3 @@ export const callAgent = async (message: string) => {
 
   return result;
 };
-
-// export const updateInventoryAgent = async (
-//   address: `0x${string}`,
-//   items: {
-//     type: ItemType;
-//     amount: number;
-//     operation: 'add' | 'remove';
-//   }[]
-// ) => {
-//   const ids = items.map((item) => BigInt(itemsMap[item.type]));
-//   const amounts = items.map((item) => BigInt(item.amount));
-//   const operations = items.map((item) => (item.operation === 'add' ? 0 : 1));
-//   const hash = await walletClient.writeContract({
-//     ...harvestHorizonsConfig,
-//     functionName: 'bulkEditInventory',
-//     args: [address, ids, amounts, operations],
-//   });
-//   await waitForTransactionReceipt(walletClient, { hash });
-// };

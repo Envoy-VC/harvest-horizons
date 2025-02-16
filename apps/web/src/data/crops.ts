@@ -18,10 +18,10 @@ export const cropDetails: Record<CropType, Crop> = {
       growthSpeedMultiplier: 1.2,
     },
     growthStages: {
-      Sprout: [0, ONE_MINUTE / 3], // Sprout for 30 Sec
-      Seedling: [ONE_MINUTE / 3, 1 * ONE_MINUTE], // Harvestable for 7 hours
-      Growth: [1 * ONE_MINUTE, 3 * ONE_MINUTE], // Growing for 7 hours
-      Harvest: [3 * ONE_MINUTE, Number.POSITIVE_INFINITY], // Harvestable after 7 mins
+      Sprout: [0, ONE_MINUTE / 4], // Sprout for 15 sec
+      Seedling: [ONE_MINUTE / 4, (1 * ONE_MINUTE) / 2], // Seedling for 30 sec
+      Growth: [(1 * ONE_MINUTE) / 2, 1 * ONE_MINUTE], // Growing for 1 Min
+      Harvest: [1 * ONE_MINUTE, Number.POSITIVE_INFINITY], // Harvestable after 7 mins
     },
     wateringRequirement: {
       frequency: 20 * ONE_MINUTE, // Needs watering every 20 minutes
@@ -48,9 +48,9 @@ export const cropDetails: Record<CropType, Crop> = {
     },
     growthStages: {
       Sprout: [0, ONE_MINUTE / 2], // Sprout for 30 Sec
-      Seedling: [ONE_MINUTE / 2, 2 * ONE_MINUTE], // Harvestable for 7 mins
-      Growth: [2 * ONE_MINUTE, 7 * ONE_MINUTE], // Harvestable for 7 mins
-      Harvest: [7 * ONE_MINUTE, Number.POSITIVE_INFINITY], // Harvestable after 7 mins
+      Seedling: [ONE_MINUTE / 2, 1 * ONE_MINUTE], // Seedling for 60 Sec
+      Growth: [1 * ONE_MINUTE, 2 * ONE_MINUTE], // Growing for 2 mins
+      Harvest: [2 * ONE_MINUTE, Number.POSITIVE_INFINITY], // Harvestable after 2 mins
     },
     wateringRequirement: {
       frequency: 30 * ONE_MINUTE, // Needs watering every 30 minutes

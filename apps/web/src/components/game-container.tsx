@@ -3,8 +3,10 @@ import { useEffect, useRef } from 'react';
 import Phaser from 'phaser';
 import { BootScene, GameScene } from '~/game/scenes';
 import MainMenuScene from '~/game/scenes/main-menu';
+import { usePlayer } from '~/hooks';
 
 export const GameContainer = () => {
+  usePlayer();
   const gameContainerRef = useRef<HTMLDivElement>(null);
   const phaserGameRef = useRef<Phaser.Game | null>(null);
 
